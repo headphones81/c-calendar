@@ -3,13 +3,13 @@
 time_t rawtime;
 struct tm * timeinfo;
 struct tm when;
-const char *days[] = {"Sunday", "Monday", "Tuesday", "Wednesday",
-				"Thursday", "Friday", "Saturday"};
-				
+const char *days[] = {"Sun", "Mon", "Tue", "Wed",
+                "Thu", "Fri", "Sat"};
+                
 int dow(int y, int m, int d) {
-	static int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
-	y -= m < 3;
-	return (y + y/4 - y/100 + y/400 + t[m-1] + d) % 7;
+    static int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+    y -= m < 3;
+    return (y + y/4 - y/100 + y/400 + t[m-1] + d) % 7;
 }
 
 int LastDay (int iMonth, int iYear)
@@ -54,8 +54,10 @@ int mon = timeinfo->tm_mon +1;
 int yea = timeinfo->tm_year +1900;
 int wday = timeinfo->tm_wday;
 int lastday = LastDay(mon,yea);
-printf("%d %d %d %d \t",day,mon,yea,wday);
-printf("%s\n\n", days[dow(yea,mon, day)]);
+//printf("%d %d %d %d \t\n",day,mon,yea,wday);
+
+for(int i = 0; i <= 6; i++){printf("%s\t",days[(i+1) % 7]);}
+printf("\n");
 for(int i = 1; i<= lastday; i++){
 if ((i == day ) && (dow(yea,mon,i) != 0)) { printf("[%d]\t" , i); }
 else if ((i == day ) && (dow(yea,mon,i) == 0)) { printf("[%d] \n" , i); }
@@ -63,5 +65,5 @@ else if ((i != day ) && (dow(yea,mon,i) != 0)){ printf("%d\t",i);}
 else if ((i != day ) && (dow(yea,mon,i) == 0)){ printf("%d \n",i);}
 
  }
-	return 0;
+    return 0;
 }
