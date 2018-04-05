@@ -5,7 +5,9 @@ struct tm * timeinfo;
 struct tm when;
 const char *days[] = {"Sun", "Mon", "Tue", "Wed",
                 "Thu", "Fri", "Sat"};
-                
+
+int a[6][7];
+
 int dow(int y, int m, int d) {
     static int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
     y -= m < 3;
@@ -54,16 +56,44 @@ int mon = timeinfo->tm_mon +1;
 int yea = timeinfo->tm_year +1900;
 int wday = timeinfo->tm_wday;
 int lastday = LastDay(mon,yea);
-//printf("%d %d %d %d \t\n",day,mon,yea,wday);
-
+printf("\t\t%d %d %d \t\n",day,mon,yea);
 for(int i = 0; i <= 6; i++){printf("%s\t",days[(i+1) % 7]);}
 printf("\n");
-for(int i = 1; i<= lastday; i++){
+
+
+//for ( int row = 0; row <=7;++row){
+for ( int i = 1; i <= lastday; ++i){
 if ((i == day ) && (dow(yea,mon,i) != 0)) { printf("[%d]\t" , i); }
 else if ((i == day ) && (dow(yea,mon,i) == 0)) { printf("[%d] \n" , i); }
 else if ((i != day ) && (dow(yea,mon,i) != 0)){ printf("%d\t",i);}
 else if ((i != day ) && (dow(yea,mon,i) == 0)){ printf("%d \n",i);}
+}
 
- }
+
+printf("\n\n");
+for (int wday = 0; wday <= 6; wday++){
+    for (int i =1; i<= lastday; ++i){
+        if (wday == dow(yea,mon,i)){a[1+(i+dow(yea,mon,1)-1)/7][wday-1] = i;}
+    
+    }
+
+    
+}
+
+ for ( int row = 0; row <= 6; ++row){
+        for (int col = 0; col < 7; ++col ){
+         if (a[row][col] != 0 && a[row][col] != day) {printf("%2d\t",a[row][col]);}
+         else if (a[row][col] != 0 && a[row][col] == day) {printf("[%d]\t",a[row][col]);}
+         else {printf("\t");}
+        }
+    
+     printf("\n");
+ }    
+/*if ((i == day ) && (dow(yea,mon,i) != 0)) { printf("[%d]\t" , i); }
+else if ((i == day ) && (dow(yea,mon,i) == 0)) { printf("[%d] \n" , i); }
+else if ((i != day ) && (dow(yea,mon,i) != 0)){ printf("%d\t",i);}
+else if ((i != day ) && (dow(yea,mon,i) == 0)){ printf("%d \n",i);}*/
+
+
     return 0;
 }
