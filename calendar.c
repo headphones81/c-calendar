@@ -61,7 +61,7 @@ for(int i = 0; i <= 6; i++){printf("%s\t",days[(i+1) % 7]);}
 printf("\n");
 
 
-//for ( int row = 0; row <=7;++row){
+/*
 for ( int i = 1; i <= lastday; ++i){
 if ((i == day ) && (dow(yea,mon,i) != 0)) { printf("[%d]\t" , i); }
 else if ((i == day ) && (dow(yea,mon,i) == 0)) { printf("[%d] \n" , i); }
@@ -69,8 +69,8 @@ else if ((i != day ) && (dow(yea,mon,i) != 0)){ printf("%d\t",i);}
 else if ((i != day ) && (dow(yea,mon,i) == 0)){ printf("%d \n",i);}
 }
 
+*/
 
-printf("\n\n");
 for (int wday = 0; wday <= 6; wday++){
     for (int i =1; i<= lastday; ++i){
         if (wday == dow(yea,mon,i)){a[1+(i+dow(yea,mon,1)-1)/7][wday-1] = i;}
@@ -89,11 +89,5 @@ for (int wday = 0; wday <= 6; wday++){
     
      printf("\n");
  }    
-/*if ((i == day ) && (dow(yea,mon,i) != 0)) { printf("[%d]\t" , i); }
-else if ((i == day ) && (dow(yea,mon,i) == 0)) { printf("[%d] \n" , i); }
-else if ((i != day ) && (dow(yea,mon,i) != 0)){ printf("%d\t",i);}
-else if ((i != day ) && (dow(yea,mon,i) == 0)){ printf("%d \n",i);}*/
-
-
     return 0;
 }
